@@ -5,13 +5,10 @@ module OTelBundlerPatch
   end
 
   def require_resources
-    env = ENV['OTEL_RUBY_RESOURCE_DETECTORS'].to_s
     additional_resource = ::OpenTelemetry::SDK::Resources::Resource.create({})
-
     additional_resource = additional_resource.merge(::OpenTelemetry::Resource::Detector::Container.detect) if defined? ::OpenTelemetry::Resource::Detector::Container
     additional_resource = additional_resource.merge(::OpenTelemetry::Resource::Detector::GoogleCloudPlatform.detect) if defined? ::OpenTelemetry::Resource::Detector::GoogleCloudPlatform
     additional_resource = additional_resource.merge(::OpenTelemetry::Resource::Detector::Azure.detect) if defined? ::OpenTelemetry::Resource::Detector::Azure
-
     additional_resource
   end
 
