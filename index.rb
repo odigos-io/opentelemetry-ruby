@@ -27,18 +27,16 @@ module OTelBundlerPatch
         c.use_all # enables all instrumentation!
         # c.resource = require_resources
       end
-      OpenTelemetry.logger.info { 'Auto-instrumentation initialized' }
+      OpenTelemetry.logger.info { 'OpenTelemetry initialized' }
     rescue StandardError => e
-      OpenTelemetry.logger.info { "Auto-instrumentation failed to initialize. Error: #{e.message}" }
+      OpenTelemetry.logger.info { "OpenTelemetry failed to initialize. Error: #{e.message}" }
     end
   end
 end
 
 additional_gem_path = ENV['ADDITIONAL_GEM_PATH'] || Gem.dir
-puts "Loading additional gems from path #{additional_gem_path}"
-
+puts "Loading additional gems from path: #{additional_gem_path}"
 Dir.glob("#{additional_gem_path}/gems/*").each do |file|
-  puts "Unshift #{file.inspect}"
   $LOAD_PATH.unshift("#{file}/lib")
 end
 
@@ -60,5 +58,3 @@ require 'opentelemetry-helpers-sql-obfuscation'
 
 Bundler::Runtime.prepend(OTelBundlerPatch)
 Bundler.require if ENV['REQUIRE_BUNDLER'].to_s == 'true'
-
-puts "ENV: #{ENV.inspect}"
