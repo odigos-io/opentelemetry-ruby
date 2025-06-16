@@ -24,10 +24,17 @@ module OTelBundlerPatch
     begin
       OpenTelemetry::SDK.configure do |c|
         c.service_name = ENV['OTEL_SERVICE_NAME']
-        c.add_span_processor(OpenTelemetry::SDK::Trace::Export::BatchSpanProcessor)
-        c.propagators = [OpenTelemetry::SDK::Propagation::TraceContextPropagator,OpenTelemetry::SDK::Propagation::BaggagePropagator]
-        c.use_all # enables all instrumentation!
+
+        c.add_span_processor(
+          OpenTelemetry::SDK::Trace::Export::BatchSpanProcessor.new
+        )
+        c.propagators = [
+          OpenTelemetry::SDK::Propagation::TraceContextPropagator.text_map_propagator,
+          OpenTelemetry::SDK::Propagation::BaggagePropagator.text_map_propagator
+        ]
+
         # c.resource = require_resources
+        c.use_all # enables all instrumentation!
       end
       OpenTelemetry.logger.info { 'OpenTelemetry initialized' }
     rescue StandardError => e
