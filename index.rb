@@ -1,3 +1,7 @@
+# refs:
+#  - https://github.com/newrelic/newrelic-ruby-agent/blob/dev/lib/boot/strap.rb
+#  - https://github.com/open-telemetry/opentelemetry-operator/blob/b4e22034a1cdc498e3f9e0cb95f7c6204972f42c/autoinstrumentation/ruby/src/autoinstrumentation.rb
+
 module OTelBundlerPatch
   def require(*_groups)
     super
@@ -19,7 +23,7 @@ module OTelBundlerPatch
 
     begin
       OpenTelemetry::SDK.configure do |c|
-        c.service_name = ENV['OTEL_SERVICE_NAME']
+        c.service_name = ENV['OTEL_SERVICE_NAME'] || 'unknown'
         c.use_all # enables all instrumentation!
         # c.resource = require_resources
       end
