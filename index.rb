@@ -23,7 +23,7 @@ module OTelBundlerPatch
 
     begin
       OpenTelemetry::SDK.configure do |c|
-        c.service_name = ENV['OTEL_SERVICE_NAME'] || 'unknown'
+        c.service_name = ENV['OTEL_SERVICE_NAME']
         c.use_all # enables all instrumentation!
         # c.resource = require_resources
       end
@@ -60,3 +60,5 @@ require 'opentelemetry-helpers-sql-obfuscation'
 
 Bundler::Runtime.prepend(OTelBundlerPatch)
 Bundler.require if ENV['REQUIRE_BUNDLER'].to_s == 'true'
+
+puts "ENV: #{ENV.inspect}"
