@@ -33,11 +33,8 @@ additional_gem_path = ENV['ADDITIONAL_GEM_PATH'] || Gem.dir
 puts "Loading additional gems from path #{additional_gem_path}"
 
 Dir.glob("#{additional_gem_path}/gems/*").each do |file|
-  # google-protobuf is used for otel trace exporter
-  if (file.include?('opentelemetry') || file.include?('google'))
-    puts "Unshift #{file.inspect}"
-    $LOAD_PATH.unshift("#{file}/lib")
-  end
+  puts "Unshift #{file.inspect}"
+  $LOAD_PATH.unshift("#{file}/lib")
 end
 
 require 'bundler'
