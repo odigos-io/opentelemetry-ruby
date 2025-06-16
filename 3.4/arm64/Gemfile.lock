@@ -1,17 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    base64 (0.3.0)
     bigdecimal (3.2.2)
-    faraday (2.13.1)
-      faraday-net_http (>= 2.0, < 3.5)
-      json
-      logger
-    faraday-net_http (3.4.1)
-      net-http (>= 0.5.0)
-    google-cloud-env (2.3.1)
-      base64 (~> 0.2)
-      faraday (>= 1.0, < 3.a)
     google-protobuf (4.31.1)
       bigdecimal
       rake (>= 13)
@@ -41,10 +31,6 @@ GEM
       rake (>= 13)
     googleapis-common-protos-types (1.20.0)
       google-protobuf (>= 3.18, < 5.a)
-    json (2.12.2)
-    logger (1.7.0)
-    net-http (0.6.0)
-      uri
     opentelemetry-api (1.5.0)
     opentelemetry-common (0.22.0)
       opentelemetry-api (~> 1.0)
@@ -254,16 +240,6 @@ GEM
       opentelemetry-semantic_conventions (>= 1.8.0)
     opentelemetry-registry (0.4.0)
       opentelemetry-api (~> 1.1)
-    opentelemetry-resource-detector-azure (0.2.0)
-      opentelemetry-sdk (~> 1.0)
-    opentelemetry-resource-detector-container (0.2.0)
-      opentelemetry-sdk (~> 1.0)
-    opentelemetry-resource-detector-google_cloud_platform (0.2.0)
-      google-cloud-env
-      opentelemetry-sdk (~> 1.0)
-    opentelemetry-resource_detectors (0.24.2)
-      google-cloud-env
-      opentelemetry-sdk (~> 1.0)
     opentelemetry-sdk (1.8.0)
       opentelemetry-api (~> 1.1)
       opentelemetry-common (~> 0.20)
@@ -272,7 +248,6 @@ GEM
     opentelemetry-semantic_conventions (1.11.0)
       opentelemetry-api (~> 1.0)
     rake (13.3.0)
-    uri (1.0.3)
 
 PLATFORMS
   aarch64-linux-gnu
@@ -292,10 +267,6 @@ DEPENDENCIES
   opentelemetry-helpers-sql (~> 0.1.1)
   opentelemetry-helpers-sql-obfuscation (~> 0.3.0)
   opentelemetry-instrumentation-all (~> 0.77.0)
-  opentelemetry-resource-detector-azure (~> 0.2.0)
-  opentelemetry-resource-detector-container (~> 0.2.0)
-  opentelemetry-resource-detector-google_cloud_platform (~> 0.2.0)
-  opentelemetry-resource_detectors (~> 0.24.2)
   opentelemetry-sdk (~> 1.8.0)
 
 BUNDLED WITH

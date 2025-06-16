@@ -26,14 +26,14 @@ checking for RB_WARN_CATEGORY_DEPRECATED in ruby.h... yes
 creating Makefile
 
 current directory: /usr/local/bundle/gems/bigdecimal-3.2.2/ext/bigdecimal
-make DESTDIR\= sitearchdir\=./.gem.20250616-7-n3blpp sitelibdir\=./.gem.20250616-7-n3blpp clean
+make DESTDIR\= sitearchdir\=./.gem.20250616-6-9q9g44 sitelibdir\=./.gem.20250616-6-9q9g44 clean
 
 current directory: /usr/local/bundle/gems/bigdecimal-3.2.2/ext/bigdecimal
-make DESTDIR\= sitearchdir\=./.gem.20250616-7-n3blpp sitelibdir\=./.gem.20250616-7-n3blpp
+make DESTDIR\= sitearchdir\=./.gem.20250616-6-9q9g44 sitelibdir\=./.gem.20250616-6-9q9g44
 compiling bigdecimal.c
 compiling missing.c
 linking shared-object bigdecimal.so
 
 current directory: /usr/local/bundle/gems/bigdecimal-3.2.2/ext/bigdecimal
-make DESTDIR\= sitearchdir\=./.gem.20250616-7-n3blpp sitelibdir\=./.gem.20250616-7-n3blpp install
-/usr/bin/install -c -m 0755 bigdecimal.so ./.gem.20250616-7-n3blpp
+make DESTDIR\= sitearchdir\=./.gem.20250616-6-9q9g44 sitelibdir\=./.gem.20250616-6-9q9g44 install
+/usr/bin/install -c -m 0755 bigdecimal.so ./.gem.20250616-6-9q9g44
