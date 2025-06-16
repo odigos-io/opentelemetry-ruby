@@ -24,6 +24,8 @@ module OTelBundlerPatch
     begin
       OpenTelemetry::SDK.configure do |c|
         c.service_name = ENV['OTEL_SERVICE_NAME']
+        c.add_span_processor(OpenTelemetry::SDK::Trace::Export::BatchSpanProcessor)
+        c.propagators = [OpenTelemetry::SDK::Propagation::TraceContextPropagator,OpenTelemetry::SDK::Propagation::BaggagePropagator]
         c.use_all # enables all instrumentation!
         # c.resource = require_resources
       end
