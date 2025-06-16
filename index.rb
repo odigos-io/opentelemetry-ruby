@@ -4,13 +4,13 @@ module OTelBundlerPatch
     require_otel
   end
 
-  def require_resources
-    additional_resource = ::OpenTelemetry::SDK::Resources::Resource.create({})
-    additional_resource = additional_resource.merge(::OpenTelemetry::Resource::Detector::Container.detect) if defined? ::OpenTelemetry::Resource::Detector::Container
-    additional_resource = additional_resource.merge(::OpenTelemetry::Resource::Detector::GoogleCloudPlatform.detect) if defined? ::OpenTelemetry::Resource::Detector::GoogleCloudPlatform
-    additional_resource = additional_resource.merge(::OpenTelemetry::Resource::Detector::Azure.detect) if defined? ::OpenTelemetry::Resource::Detector::Azure
-    additional_resource
-  end
+  # def require_resources
+  #   additional_resource = ::OpenTelemetry::SDK::Resources::Resource.create({})
+  #   additional_resource = additional_resource.merge(::OpenTelemetry::Resource::Detector::Container.detect) if defined? ::OpenTelemetry::Resource::Detector::Container
+  #   additional_resource = additional_resource.merge(::OpenTelemetry::Resource::Detector::GoogleCloudPlatform.detect) if defined? ::OpenTelemetry::Resource::Detector::GoogleCloudPlatform
+  #   additional_resource = additional_resource.merge(::OpenTelemetry::Resource::Detector::Azure.detect) if defined? ::OpenTelemetry::Resource::Detector::Azure
+  #   additional_resource
+  # end
 
   def require_otel
     lib = File.expand_path('..', __dir__)
@@ -19,8 +19,8 @@ module OTelBundlerPatch
 
     begin
       OpenTelemetry::SDK.configure do |c|
-        c.resource = require_resources
         c.use_all # enables all instrumentation!
+        # c.resource = require_resources
       end
       OpenTelemetry.logger.info { 'Auto-instrumentation initialized' }
     rescue StandardError => e
@@ -44,10 +44,10 @@ require 'opentelemetry-sdk'
 require 'opentelemetry-exporter-otlp'
 require 'opentelemetry-instrumentation-all'
 
-require 'opentelemetry-resource_detectors'
-require 'opentelemetry-resource-detector-container'
-require 'opentelemetry-resource-detector-google_cloud_platform'
-require 'opentelemetry-resource-detector-azure'
+# require 'opentelemetry-resource_detectors'
+# require 'opentelemetry-resource-detector-container'
+# require 'opentelemetry-resource-detector-google_cloud_platform'
+# require 'opentelemetry-resource-detector-azure'
 
 require 'opentelemetry-helpers-mysql'
 require 'opentelemetry-helpers-sql'
