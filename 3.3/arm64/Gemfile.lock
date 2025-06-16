@@ -270,4 +270,4 @@ DEPENDENCIES
   opentelemetry-sdk (~> 1.8.0)
 
 BUNDLED WITH
-   2.5.22
+   2.6.9

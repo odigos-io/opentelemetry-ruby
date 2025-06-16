@@ -28,17 +28,17 @@ checking for RB_WARN_CATEGORY_DEPRECATED in ruby.h... yes
 creating Makefile
 
 current directory: /usr/local/bundle/gems/bigdecimal-3.2.2/ext/bigdecimal
-make DESTDIR\= sitearchdir\=./.gem.20250616-7-1crzpw sitelibdir\=./.gem.20250616-7-1crzpw clean
+make DESTDIR\= sitearchdir\=./.gem.20250616-7-9fulsw sitelibdir\=./.gem.20250616-7-9fulsw clean
 
 current directory: /usr/local/bundle/gems/bigdecimal-3.2.2/ext/bigdecimal
-make DESTDIR\= sitearchdir\=./.gem.20250616-7-1crzpw sitelibdir\=./.gem.20250616-7-1crzpw
+make DESTDIR\= sitearchdir\=./.gem.20250616-7-9fulsw sitelibdir\=./.gem.20250616-7-9fulsw
 compiling bigdecimal.c
 compiling missing.c
 linking shared-object bigdecimal.so
 
 current directory: /usr/local/bundle/gems/bigdecimal-3.2.2/ext/bigdecimal
-make DESTDIR\= sitearchdir\=./.gem.20250616-7-1crzpw sitelibdir\=./.gem.20250616-7-1crzpw install
-/usr/bin/install -c -m 0755 bigdecimal.so ./.gem.20250616-7-1crzpw
+make DESTDIR\= sitearchdir\=./.gem.20250616-7-9fulsw sitelibdir\=./.gem.20250616-7-9fulsw install
+/usr/bin/install -c -m 0755 bigdecimal.so ./.gem.20250616-7-9fulsw
 
 current directory: /usr/local/bundle/gems/bigdecimal-3.2.2/ext/bigdecimal
-make DESTDIR\= sitearchdir\=./.gem.20250616-7-1crzpw sitelibdir\=./.gem.20250616-7-1crzpw clean
+make DESTDIR\= sitearchdir\=./.gem.20250616-7-9fulsw sitelibdir\=./.gem.20250616-7-9fulsw clean
