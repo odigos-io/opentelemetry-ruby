@@ -14,7 +14,7 @@ jobs:
       matrix:
         include:
           - ruby-version: '3.1'
-            rails-version: '7.0'
+            rails-version: '7.1'
           - ruby-version: '3.2'
             rails-version: '7.1'
           - ruby-version: '3.3'
@@ -120,8 +120,8 @@ jobs:
           # Add a simple controller for testing
           rails generate controller Test index
 
-          # Update the route
-          sed -i 's|get "test/index"|get "test", to: "test#index"|' config/routes.rb
+          # Update the route to match SERVICE_TEST_ROUTE
+          sed -i 's|get "test/index"|get "'${{ env.SERVICE_TEST_ROUTE }}'", to: "test#index"|' config/routes.rb
 
           # Update the controller
           cat > app/controllers/test_controller.rb << 'EOF'
