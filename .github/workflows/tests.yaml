@@ -25,7 +25,7 @@ jobs:
     env:
       ARCHITECTURE: 'amd64' # having trouble getting a runner with arm64, so no matrix for 'arch' at the moment
       SERVICE_NAME: 'rails-app-${{ matrix.ruby-version }}'
-      SERVICE_TEST_ROUTE: '/test'
+      SERVICE_TEST_ROUTE: 'test'
 
     steps:
       - name: Checkout code
@@ -121,14 +121,12 @@ jobs:
           rails generate controller Test index
 
           # Update the route
-          sed -i 's|get "test/index"|get "'${{ env.SERVICE_TEST_ROUTE }}'", to: "test#index"|' config/routes.rb
-
-          cat config/routes.rb
+          sed -i 's|get "${{ env.SERVICE_TEST_ROUTE }}/index"|get "${{ env.SERVICE_TEST_ROUTE }}", to: "${{ env.SERVICE_TEST_ROUTE }}#index"|' config/routes.rb
 
           # Update the controller
           cat > app/controllers/test_controller.rb << 'EOF'
           class TestController < ApplicationController
-            def index
+            def ${{ env.SERVICE_TEST_ROUTE }}
               render json: {
                 message: "Hello from Ruby ${{ matrix.ruby-version }}!",
                 timestamp: Time.current.to_i
@@ -173,7 +171,7 @@ jobs:
 
           echo "Generating traffic..."
           for i in {1..30}; do
-            if curl -f http://localhost:8000${{ env.SERVICE_TEST_ROUTE }} > /dev/null 2>&1; then
+            if curl -f http://localhost:8000/${{ env.SERVICE_TEST_ROUTE }} > /dev/null 2>&1; then
               echo "✅ Server is ready, traffic generated"
               break
             fi
