@@ -121,7 +121,7 @@ jobs:
           rails generate controller Test index
 
           # Update the route
-          sed -i 's|get "${{ env.SERVICE_TEST_ROUTE }}/index"|get "${{ env.SERVICE_TEST_ROUTE }}", to: "${{ env.SERVICE_TEST_ROUTE }}#index"|' config/routes.rb
+          sed -i 's|# Defines the root path route ("/")|get "/${{ env.SERVICE_TEST_ROUTE }}", to: "${{ env.SERVICE_TEST_ROUTE }}#index"|' config/routes.rb
 
           # Update the controller
           cat > app/controllers/test_controller.rb << 'EOF'
