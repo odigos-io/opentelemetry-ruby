@@ -114,7 +114,7 @@ jobs:
         run: |
           # Create new Rails app
           gem install rails -v ${{ matrix.rails-version }}
-          rails new ${{ env.SERVICE_NAME }} --api --skip-action-mailer --skip-active-storage --skip-action-mailbox --skip-action-text --skip-active-job --skip-action-cable --skip-javascript --skip-hotwire --skip-jbuilder --skip-test --skip-system-test --skip-bootsnap --skip-git
+          rails new ${{ env.SERVICE_NAME }} --skip-git --skip-test --skip-system-test --skip-javascript
           cd ${{ env.SERVICE_NAME }}
 
           # Add a simple controller for testing
