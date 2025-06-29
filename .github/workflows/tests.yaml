@@ -120,8 +120,10 @@ jobs:
           # Add a simple controller for testing
           rails generate controller Test index
 
-          # Update the route to match SERVICE_TEST_ROUTE
+          # Update the route
           sed -i 's|get "test/index"|get "'${{ env.SERVICE_TEST_ROUTE }}'", to: "test#index"|' config/routes.rb
+
+          cat config/routes.rb
 
           # Update the controller
           cat > app/controllers/test_controller.rb << 'EOF'
