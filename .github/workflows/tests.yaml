@@ -126,7 +126,7 @@ jobs:
           # Update the controller
           cat > app/controllers/test_controller.rb << 'EOF'
           class TestController < ApplicationController
-            def ${{ env.SERVICE_TEST_ROUTE }}
+            def index
               render json: {
                 message: "Hello from Ruby ${{ matrix.ruby-version }}!",
                 timestamp: Time.current.to_i
@@ -165,6 +165,10 @@ jobs:
           RAILS_PID=$!
           echo $RAILS_PID > rails.pid
 
+          echo "🔍 Config/routes.rb:"
+          cat config/routes.rb
+          echo "🔍 App/controllers/test_controller.rb:"
+          cat app/controllers/test_controller.rb
           echo "🔍 Available routes for the Rails application:"
           rails routes
           echo ""
