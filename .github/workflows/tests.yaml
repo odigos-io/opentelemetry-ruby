@@ -165,6 +165,12 @@ jobs:
           RAILS_PID=$!
           echo $RAILS_PID > rails.pid
 
+          echo "🔍 Available routes for the Rails application:"
+          rails routes
+          echo ""
+          echo "📋 Route details:"
+          rails routes --format expanded
+
       - name: Generate Traffic
         run: |
           cd ${{ env.SERVICE_NAME }}
