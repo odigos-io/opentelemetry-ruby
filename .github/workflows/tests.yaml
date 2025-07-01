@@ -149,7 +149,7 @@ jobs:
 
           # Set environment variables
           echo "RUBYOPT=-r$(pwd)/${{ matrix.ruby-version }}/index.rb" >> $GITHUB_ENV
-          echo "ADDITIONAL_GEM_PATH=$(pwd)/${{ matrix.ruby-version }}/bundle" >> $GITHUB_ENV
+          echo "ODIGOS_GEM_PATH=$(pwd)/${{ matrix.ruby-version }}/bundle" >> $GITHUB_ENV
           echo "OTEL_SERVICE_NAME=${{ env.SERVICE_NAME }}" >> $GITHUB_ENV
           echo "OTEL_TRACES_EXPORTER=otlp" >> $GITHUB_ENV
           echo "OTEL_METRICS_EXPORTER=none" >> $GITHUB_ENV
