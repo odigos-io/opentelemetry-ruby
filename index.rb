@@ -34,9 +34,8 @@ module OTelBundlerPatch
   end
 end
 
-additional_gem_path = ENV['ADDITIONAL_GEM_PATH'] || Gem.dir
-puts "Loading additional gems from path: #{additional_gem_path}"
-Dir.glob("#{additional_gem_path}/gems/*").each do |file|
+gem_path = ENV['ODIGOS_GEM_PATH'] || Gem.dir
+Dir.glob("#{gem_path}/gems/*").each do |file|
   $LOAD_PATH.unshift("#{file}/lib")
 end
 
