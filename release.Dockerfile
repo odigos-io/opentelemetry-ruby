@@ -12,6 +12,8 @@ RUN mkdir -p /instrumentations/ruby
 RUN for v in ${RUBY_VERSIONS}; do \
     mkdir -p /instrumentations/ruby/$v; \
     mv ./$v/${TARGETARCH}/* /instrumentations/ruby/$v/; \
+    cp ./Gemfile /instrumentations/ruby/$v/Gemfile; \
+    cp ./index.rb /instrumentations/ruby/$v/index.rb; \
     done
 
 FROM scratch
