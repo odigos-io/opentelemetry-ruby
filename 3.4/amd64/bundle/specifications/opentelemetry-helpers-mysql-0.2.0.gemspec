@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.rubygems_version = "3.3.27".freeze
   s.summary = "MySQL Instrumentation Helpers for the OpenTelemetry framework".freeze
 
-  s.installed_by_version = "3.6.7".freeze
+  s.installed_by_version = "3.6.9".freeze
 
   s.specification_version = 4
 

@@ -1,38 +1,38 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    bigdecimal (3.2.2)
-    google-protobuf (4.31.1)
+    bigdecimal (4.0.1)
+    google-protobuf (4.33.5)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.31.1-aarch64-linux-gnu)
+    google-protobuf (4.33.5-aarch64-linux-gnu)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.31.1-aarch64-linux-musl)
+    google-protobuf (4.33.5-aarch64-linux-musl)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.31.1-arm64-darwin)
+    google-protobuf (4.33.5-arm64-darwin)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.31.1-x86-linux-gnu)
+    google-protobuf (4.33.5-x86-linux-gnu)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.31.1-x86-linux-musl)
+    google-protobuf (4.33.5-x86-linux-musl)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.31.1-x86_64-darwin)
+    google-protobuf (4.33.5-x86_64-darwin)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.31.1-x86_64-linux-gnu)
+    google-protobuf (4.33.5-x86_64-linux-gnu)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.31.1-x86_64-linux-musl)
+    google-protobuf (4.33.5-x86_64-linux-musl)
       bigdecimal
       rake (>= 13)
-    googleapis-common-protos-types (1.20.0)
-      google-protobuf (>= 3.18, < 5.a)
+    googleapis-common-protos-types (1.22.0)
+      google-protobuf (~> 4.26)
     opentelemetry-api (1.5.0)
-    opentelemetry-common (0.22.0)
+    opentelemetry-common (0.23.0)
       opentelemetry-api (~> 1.0)
     opentelemetry-exporter-otlp (0.30.0)
       google-protobuf (>= 3.18)
@@ -52,7 +52,7 @@ GEM
       opentelemetry-api (~> 1.0)
       opentelemetry-instrumentation-active_support (~> 0.7)
       opentelemetry-instrumentation-base (~> 0.23.0)
-    opentelemetry-instrumentation-action_pack (0.12.2)
+    opentelemetry-instrumentation-action_pack (0.12.3)
       opentelemetry-api (~> 1.0)
       opentelemetry-instrumentation-base (~> 0.23.0)
       opentelemetry-instrumentation-rack (~> 0.21)
@@ -116,7 +116,7 @@ GEM
     opentelemetry-instrumentation-aws_lambda (0.3.0)
       opentelemetry-api (~> 1.0)
       opentelemetry-instrumentation-base (~> 0.23.0)
-    opentelemetry-instrumentation-aws_sdk (0.8.1)
+    opentelemetry-instrumentation-aws_sdk (0.8.2)
       opentelemetry-api (~> 1.0)
       opentelemetry-instrumentation-base (~> 0.23.0)
     opentelemetry-instrumentation-base (0.23.0)
@@ -178,7 +178,7 @@ GEM
       opentelemetry-helpers-sql
       opentelemetry-helpers-sql-obfuscation
       opentelemetry-instrumentation-base (~> 0.23.0)
-    opentelemetry-instrumentation-net_http (0.23.0)
+    opentelemetry-instrumentation-net_http (0.23.1)
       opentelemetry-api (~> 1.0)
       opentelemetry-instrumentation-base (~> 0.23.0)
     opentelemetry-instrumentation-pg (0.30.1)
@@ -240,14 +240,14 @@ GEM
       opentelemetry-semantic_conventions (>= 1.8.0)
     opentelemetry-registry (0.4.0)
       opentelemetry-api (~> 1.1)
-    opentelemetry-sdk (1.8.0)
+    opentelemetry-sdk (1.8.1)
       opentelemetry-api (~> 1.1)
       opentelemetry-common (~> 0.20)
       opentelemetry-registry (~> 0.2)
       opentelemetry-semantic_conventions
-    opentelemetry-semantic_conventions (1.11.0)
+    opentelemetry-semantic_conventions (1.36.0)
       opentelemetry-api (~> 1.0)
-    rake (13.3.0)
+    rake (13.3.1)
 
 PLATFORMS
   aarch64-linux-gnu
