@@ -12,7 +12,12 @@ RUN for platform in $PLATFORMS; do \
   bundle lock --add-platform $platform ; \
   done
 
-RUN bundle install
+# Install gems to a specific path
+# Remove bundler specs from the bundle since bundler is a tool, not a runtime dependency
+# This prevents version conflicts when bundler runs at runtime
+RUN bundle config set --local path 'bundle' && \
+    bundle install && \
+    find bundle -name 'bundler-*.gemspec' -delete 2>/dev/null || true
 
 FROM scratch AS output
 COPY --from=builder . .
