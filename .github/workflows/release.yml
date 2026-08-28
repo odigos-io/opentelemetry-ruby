@@ -6,22 +6,24 @@ on:
       - 'v*'
 
 env:
-  ECR_REPO: public.ecr.aws/odigos/agents/ruby-community
+  DOCKER_REPOSITORY_NAME: ruby-community
+  ECR_REGISTRY: public.ecr.aws/odigos/agents
+  DEPOT_REGISTRY: p0xd21zf5r.registry.depot.dev
 
 jobs:
   release:
-    runs-on: ubuntu-latest
+    runs-on: depot-ubuntu-24.04-4
     permissions:
       contents: read
       id-token: write
-      
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
@@ -36,6 +38,16 @@ jobs:
           aws ecr-public get-login-password --region us-east-1 \
           | docker login --username AWS --password-stdin public.ecr.aws
 
+      - name: Login to Depot Registry
+        run: docker login --username x-token --password ${{ secrets.DEPOT_PUSH_TOKEN }} ${DEPOT_REGISTRY}
+
+      - name: Compute Docker tags
+        id: docker-tags
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          echo "tags=${ECR_REGISTRY}/${DOCKER_REPOSITORY_NAME}:${TAG},${DEPOT_REGISTRY}/${DOCKER_REPOSITORY_NAME}:${TAG},${ECR_REGISTRY}/${DOCKER_REPOSITORY_NAME}:latest,${DEPOT_REGISTRY}/${DOCKER_REPOSITORY_NAME}:latest" >> "$GITHUB_OUTPUT"
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
@@ -44,11 +56,11 @@ jobs:
           file: release.Dockerfile
           push: true
           build-args: AGENT_VERSION=${{ github.ref_name }}
-          tags: ${{ env.ECR_REPO }}:${{ github.ref_name }},${{ env.ECR_REPO }}:latest
+          tags: ${{ steps.docker-tags.outputs.tags }}
 
       - name: Notify Slack
         uses: odigos-io/ci-core/.github/actions/slack-release-notification@main
-        with: 
+        with:
           webhook-url: ${{ secrets.ODIGOS_RELEASE_STATUS_WEBHOOK_URL }}
           success-description: "Published a new release of OpenTelemetry Ruby Community Agent"
           failure-description: "ERROR: Failed to publish a new release of OpenTelemetry Ruby Community Agent"
@@ -57,7 +69,7 @@ jobs:
   # Trigger Odigos version update (OSS, Enterprise, VM Agent)
   trigger-odigos-update:
     needs: release
-    runs-on: ubuntu-latest
+    runs-on: depot-ubuntu-latest
     permissions:
       id-token: write
       contents: read
@@ -71,4 +83,3 @@ jobs:
             odigos
             odigos-enterprise
             vm-agent
-            
