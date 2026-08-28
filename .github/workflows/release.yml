@@ -7,6 +7,7 @@ on:
 
 env:
   DOCKER_REPOSITORY_NAME: ruby-community
+  DEPOT_REPOSITORY_NAME: 'agents/ruby-community'
   ECR_REGISTRY: public.ecr.aws/odigos/agents
   DEPOT_REGISTRY: p0xd21zf5r.registry.depot.dev
 
@@ -39,14 +40,14 @@ jobs:
           | docker login --username AWS --password-stdin public.ecr.aws
 
       - name: Login to Depot Registry
-        run: docker login --username x-token --password ${{ secrets.DEPOT_PUSH_TOKEN }} ${DEPOT_REGISTRY}
+        run: echo "${{ secrets.DEPOT_PUSH_TOKEN }}" | docker login ${DEPOT_REGISTRY} -u x-token --password-stdin
 
       - name: Compute Docker tags
         id: docker-tags
         env:
           TAG: ${{ github.ref_name }}
         run: |
-          echo "tags=${ECR_REGISTRY}/${DOCKER_REPOSITORY_NAME}:${TAG},${DEPOT_REGISTRY}/${DOCKER_REPOSITORY_NAME}:${TAG},${ECR_REGISTRY}/${DOCKER_REPOSITORY_NAME}:latest,${DEPOT_REGISTRY}/${DOCKER_REPOSITORY_NAME}:latest" >> "$GITHUB_OUTPUT"
+          echo "tags=${ECR_REGISTRY}/${DOCKER_REPOSITORY_NAME}:${TAG},${DEPOT_REGISTRY}/${DEPOT_REPOSITORY_NAME}:${TAG},${ECR_REGISTRY}/${DOCKER_REPOSITORY_NAME}:latest,${DEPOT_REGISTRY}/${DEPOT_REPOSITORY_NAME}:latest" >> "$GITHUB_OUTPUT"
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
