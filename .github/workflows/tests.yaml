@@ -21,6 +21,8 @@ jobs:
             rails-version: '7.1'
           - ruby-version: '3.4'
             rails-version: '7.1'
+          - ruby-version: '4.0'
+            rails-version: '7.1'
 
     env:
       ARCHITECTURE: 'amd64' # having trouble getting a runner with arm64, so no matrix for 'arch' at the moment
@@ -156,6 +158,21 @@ jobs:
           echo "OTEL_LOGS_EXPORTER=none" >> $GITHUB_ENV
           echo "OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:${{ env.OTEL_COLLECTOR_HTTP_PORT }}" >> $GITHUB_ENV
           echo "OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf" >> $GITHUB_ENV
+
+      - name: Verify agent loads in an app whose bundle has no logger
+        run: |
+          # Regression test: since Ruby 4.0 logger is a bundled gem, so an app whose
+          # Gemfile.lock lacks it must still boot with the agent injected via RUBYOPT.
+          APP_DIR=$(mktemp -d)
+          printf "source 'https://rubygems.org'\ngem 'rack'\n" > "$APP_DIR/Gemfile"
+          cd "$APP_DIR"
+          export BUNDLE_GEMFILE="$APP_DIR/Gemfile" BUNDLE_PATH="$APP_DIR/vendor" BUNDLE_DEPLOYMENT=false BUNDLE_FROZEN=false
+          env -u RUBYOPT bundle install
+          if grep -qE '^    logger ' Gemfile.lock; then
+            echo "❌ Test app bundle unexpectedly contains logger, this check would be meaningless"
+            exit 1
+          fi
+          bundle exec ruby -e 'exit(defined?(OpenTelemetry::SDK) ? 0 : 1)'
 
       - name: Start Application
         run: |
