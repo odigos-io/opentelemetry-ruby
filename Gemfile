@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'opentelemetry-api', '~> 1.5.0'
-gem 'opentelemetry-sdk', '~> 1.8.0'
-gem 'opentelemetry-exporter-otlp', '~> 0.30.0'
+gem 'opentelemetry-api', '~> 1.8.0'
+gem 'opentelemetry-sdk', '~> 1.10.0'
+gem 'opentelemetry-exporter-otlp', '~> 0.32.0'
 gem 'opentelemetry-instrumentation-all', '~> 0.77.0'
 
 # gem 'opentelemetry-resource_detectors', '~> 0.24.2'

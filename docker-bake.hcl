@@ -4,6 +4,7 @@ group "default" {
     "ruby32-arm64", "ruby32-amd64",
     "ruby33-arm64", "ruby33-amd64",
     "ruby34-arm64", "ruby34-amd64",
+    "ruby40-arm64", "ruby40-amd64",
   ]
 }
 
@@ -91,3 +92,23 @@ target "ruby34-amd64" {
     RUBY_VERSION = "3.4"
   }
 }
+
+target "ruby40-arm64" {
+  inherits = ["ruby-base"]
+  platforms = ["linux/arm64"]
+  tags     = ["otel-ruby:4.0-arm64"]
+  output = ["type=oci,dest=tmp/otel-ruby-4.0-arm64.tar"]
+  args = {
+    RUBY_VERSION = "4.0"
+  }
+}
+target "ruby40-amd64" {
+  inherits = ["ruby-base"]
+  platforms = ["linux/amd64"]
+  tags     = ["otel-ruby:4.0-amd64"]
+  output = ["type=oci,dest=tmp/otel-ruby-4.0-amd64.tar"]
+  args = {
+    RUBY_VERSION = "4.0"
+  }
+}
+

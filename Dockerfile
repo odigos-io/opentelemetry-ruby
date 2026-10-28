@@ -15,7 +15,13 @@ RUN for platform in $PLATFORMS; do \
 # Install gems using default bundler location (/usr/local/bundle)
 # Remove bundler specs from the bundle since bundler is a tool, not a runtime dependency
 # This prevents version conflicts when bundler runs at runtime
+# Gems the base image already provides (e.g. logger, a bundled gem since Ruby 4.0) are skipped by bundler,
+# so install them into the bundle as well, since the agent is loaded from this directory alone
 RUN bundle install && \
+    bundle exec ruby -e 'Bundler.load.specs.each { |s| puts "#{s.name} #{s.version}" unless s.full_gem_path.start_with?("/usr/local/bundle") }' | \
+    while read -r name version; do \
+      gem install "$name" -v "$version" --install-dir /usr/local/bundle --ignore-dependencies --no-document; \
+    done && \
     find /usr/local/bundle -name 'bundler-*.gemspec' -delete 2>/dev/null || true
 
 FROM scratch AS output

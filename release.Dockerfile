@@ -1,7 +1,7 @@
 FROM --platform=$BUILDPLATFORM alpine AS ruby-community-build
 WORKDIR /opentelemetry-ruby
 ARG TARGETARCH
-ARG RUBY_VERSIONS="3.1 3.2 3.3 3.4"
+ARG RUBY_VERSIONS="3.1 3.2 3.3 3.4 4.0"
 ENV RUBY_VERSIONS=${RUBY_VERSIONS}
 COPY . .
 
